@@ -2,15 +2,16 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const galleryRef = document.querySelector(".gallery");
-const markup = createMarkup(galleryItems);
-galleryRef.innerHTML = markup;
+// const markUp = createMarkUp(galleryItems);
+galleryRef.insertAdjacentHTML("beforeend", createMarkUp(galleryItems));
 
-function createMarkup(items) {
-  return items
-    .map(() => {
-      return '<li class="gallery__item"><a class="gallery__link" href="large-image.jpg"><imgclass="gallery__image"src=small-image.jpg"data-source="large-image.jpg"alt="Image description"/></a></li>';
+function createMarkUp(galleryItems) {
+  const markUp = galleryItems
+    .map(({ preview, original, description }) => {
+      return '<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" data-source= "${original}" alt="${description}"/></a></li>';
     })
     .join("");
+  return markUp;
 }
 
 // galleryRef.addEventListener("click", (e) => {
@@ -24,7 +25,6 @@ function createMarkup(items) {
 // 	`).show()
 
 // }
-
 
 // const instance = basicLightbox.create(`
 //     <img src="assets/images/image.png" width="800" height="600">
