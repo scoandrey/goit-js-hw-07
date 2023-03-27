@@ -14,15 +14,15 @@ function createMarkUp(galleryItems) {
 }
 
 galleryRef.addEventListener("click", (e) => {
-  onModal(e);
   e.preventDefault();
-  if (e.target.nodeName === "IMG");
-  return;
+  if (e.target.nodeName !== "IMG") return;
+  onModal(e);
 });
 
 function onModal(e) {
+  console.log(e.target);
   const instance = basicLightbox.create(
-    `<img src="${e.target.dataset.sourse}"/>`,
+    `<img src="${e.target.dataset.source}"/>`,
     {
       onShow: (_instance) => {
         galleryRef.addEventListener("keydown", onEscBtn);
@@ -36,7 +36,7 @@ function onModal(e) {
 
   function onEscBtn(e) {
     if (e.code === "Escape") {
+      instance.close();
     }
-    instance.close();
   }
 }
